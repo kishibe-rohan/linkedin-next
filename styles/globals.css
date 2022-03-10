@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+@layer base {
+  body {
+    @apply bg-gray-100;
+  }
+}
+
+@layer components {
+  .intent {
+    @apply flex justify-between items-center hover:shadow-xl p-4 cursor-pointer rounded-lg text-black bg-white max-w-md mx-auto xl:mx-0;
+  }
+
+  .inputButton {
+    @apply flex items-center space-x-2 font-medium cursor-pointer text-sm;
+  }
+}
