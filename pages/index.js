@@ -1,9 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 
-import { signOut } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   return (
@@ -14,6 +16,31 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+
+      <main className="flex justify-center gap-x-5 px-4 sm:px-12">
+        <div className="flex flex-col md:flex-row gap-5">
+          <Sidebar />
+          <div>Feed</div>
+        </div>
+        <div>Widgets</div>
+      </main>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  //Check if user is authenticated
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/home",
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
 }
