@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import Widgets from "../components/Widgets";
 
-export default function Home() {
+export default function Home({ articles }) {
   return (
     <div className="bg-[#F3F2EF] dark:bg-black dark:text-white h-screen overflow-y-scroll md:space-y-6">
       <Head>
@@ -22,7 +23,7 @@ export default function Home() {
           <Sidebar />
           <div>Feed</div>
         </div>
-        <div>Widgets</div>
+        <Widgets articles={articles} />
       </main>
     </div>
   );
@@ -40,7 +41,12 @@ export async function getServerSideProps(context) {
     };
   }
 
+  //Get Articles
+  const results = await fetch(
+    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEWS_API_KEY}`
+  ).then((res) => res.json());
+
   return {
-    props: { session },
+    props: { session, articles: results.articles },
   };
 }
