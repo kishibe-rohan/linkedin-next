@@ -1,7 +1,17 @@
 import {useState,useEffect} from 'react'
+import { useRecoilState } from "recoil";
+
+import Input from './Input'
+import Post from './Post'
+
+import { handlePostState, useSSRPostsState } from "../atoms/postAtom";
+
 
 function Feed({posts}){
    const [realTimePosts,setRealTimePosts] = useState([]);
+
+   const [handlePost,setHandlePost] = useRecoilState(handlePostState);
+   const [useSSRPosts,setUseSSRPosts] = useRecoilState(useSSRPostsState);
 
    useEffect(() => {
          const fetchPosts = async() => {
@@ -21,7 +31,8 @@ function Feed({posts}){
        <div className="space-y-6 pb-24 max-w-lg">
            <Input/>
            {
-               realTimePosts.map((post) => <Post key={post._id} post={post}/>)
+               !useSSRPosts?realTimePosts.map((post) => <Post key={post._id} post={post} />)
+               :posts.map((post) => <Post key={post._id} post={post}/>)
            }
        </div>
    )
