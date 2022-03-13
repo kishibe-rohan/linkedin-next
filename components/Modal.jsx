@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 
 import { useRecoilValue } from "recoil";
 import { getPostState } from "../atoms/postAtom";
+import { useSession } from 'next-auth/react'
 
 const dropIn = {
     hidden:{
