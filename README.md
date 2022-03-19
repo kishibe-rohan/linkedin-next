@@ -1,6 +1,6 @@
 <h1><b>Linked Next</b> | NextJS LinkedIn Clone</h1>
 
-Twitter clone designed using **Tailwind CSS** and **Next-Auth** for Authentication with **Recoil** for state management and features such as Login, Post & Like 
+LinkedIn clone designed using **Tailwind CSS** and **Next-Auth** for Authentication with **Recoil** for state management and features such as Login, Post & Like 
 --
 
 ![Linclone](https://i.ibb.co/2Zj99n4/Screenshot-484.png)
